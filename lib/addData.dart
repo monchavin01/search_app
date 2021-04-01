@@ -115,18 +115,10 @@ class AddData extends StatelessWidget {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
+          title: Text('เพิ่มข้อมูลเรียบร้อย'),
           actions: <Widget>[
             TextButton(
-              child: Text('Approve'),
+              child: Text('ตกลง'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
