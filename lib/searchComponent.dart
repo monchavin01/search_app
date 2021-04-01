@@ -10,43 +10,50 @@ class SearchFeed extends StatefulWidget {
 }
 
 class _SearchFeedState extends State<SearchFeed> {
+  String _chosenValue;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 128),
-      child: Container(
-        child: FirestoreSearchScaffold(
-          scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
-          searchBackgroundColor: Colors.white,
-          appBarBackgroundColor: Colors.black.withOpacity(0.1),
-          firestoreCollectionName: 'clients',
-          searchBy: 'name',
-          dataListFromSnapshot: DataModel().dataListFromSnapshot,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final List<DataModel> dataList = snapshot.data;
-              return ListView.builder(
-                  itemCount: dataList?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final DataModel data = dataList[index];
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: _buildListLayout(context, data))
-                      ],
-                    );
-                  });
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 128),
+          child: Container(
+            child: FirestoreSearchScaffold(
+              scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
+              searchBackgroundColor: Colors.white,
+              appBarBackgroundColor: Colors.black.withOpacity(0.1),
+              firestoreCollectionName: _chosenValue,
+              searchBy: 'name',
+              dataListFromSnapshot: DataModel().dataListFromSnapshot,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final List<DataModel> dataList = snapshot.data;
+                  return ListView.builder(
+                      itemCount: dataList?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        final DataModel data = dataList[index];
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildListLayout(context, data))
+                          ],
+                        );
+                      });
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          ),
         ),
-      ),
+        _buildDropDown(),
+      ],
     );
   }
 
@@ -80,6 +87,63 @@ class _SearchFeedState extends State<SearchFeed> {
               child: Text('${data?.name ?? ''}'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropDown() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 133.0,
+        left: 10,
+        right: 10,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        width: Get.width,
+        height: Get.height * 0.045,
+        child: Center(
+          child: DropdownButton(
+            value: _chosenValue,
+            style: TextStyle(color: Colors.white),
+            iconEnabledColor: Colors.grey,
+            items: [
+              'onGrass',
+              'running',
+              'court',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(color: Colors.black),
+                ),
+              );
+            }).toList(),
+            hint: Text(
+              "Please choose type shoe",
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
+            onChanged: (String value) {
+              setState(() {
+                _chosenValue = value;
+              });
+            },
+          ),
         ),
       ),
     );

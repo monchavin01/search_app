@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:search_test/addData.dart';
+import 'package:search_test/addDataInDB.dart';
 import 'package:search_test/searchComponent.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onDoubleTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddData()),
+              MaterialPageRoute(builder: (context) => AddDataInDB()),
             );
           },
           child: Text(
