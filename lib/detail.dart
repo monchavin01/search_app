@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:search_test/main.dart';
+import 'package:search_test/dataModel.dart';
 
 class Detail extends StatelessWidget {
   final DataModel data;
@@ -30,7 +30,9 @@ class Detail extends StatelessWidget {
                       ),
               ),
             ),
-            description,
+            data.description != ""
+                ? _buildLayoutDescription(data.description)
+                : _buildLayoutDescription('ไม่มีคำอธิบาย')
           ],
         ),
       ),
@@ -52,7 +54,7 @@ class Detail extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "MEN'S ORIGINAL",
+                  "SHOES",
                   style: TextStyle(fontWeight: FontWeight.w100, fontSize: 14),
                 ),
                 Text(
@@ -71,14 +73,15 @@ class Detail extends StatelessWidget {
     );
   }
 
-  var description = Container(
-    child: Text(
-      "A style icon gets some love from one of today's top "
-      "trendsetters. Pharrell Williams puts his creative spin on these "
-      "shoes, which have all the clean, classicdetails of the beloved Stan Smith.",
-      textAlign: TextAlign.justify,
-      style: TextStyle(height: 1.5, color: Color(0xFF6F8398)),
-    ),
-    padding: EdgeInsets.all(16),
-  );
+  Widget _buildLayoutDescription(String value) {
+    value = data.description;
+    return Container(
+      child: Text(
+        value,
+        // textAlign: TextAlign.justify,
+        style: TextStyle(height: 1.5, color: Color(0xFF6F8398), fontSize: 16),
+      ),
+      padding: EdgeInsets.all(16),
+    );
+  }
 }
