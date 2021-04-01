@@ -23,7 +23,7 @@ class _SearchFeedState extends State<SearchFeed> {
               scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
               searchBackgroundColor: Colors.white,
               appBarBackgroundColor: Colors.black.withOpacity(0.1),
-              firestoreCollectionName: _chosenValue,
+              firestoreCollectionName: _chosenValue ?? "onGrass",
               searchBy: 'name',
               dataListFromSnapshot: DataModel().dataListFromSnapshot,
               builder: (context, snapshot) {
