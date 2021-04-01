@@ -40,7 +40,8 @@ class _SearchFeedState extends State<SearchFeed> {
                           children: [
                             Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: _buildListLayout(context, data))
+                                child: _buildListLayout(
+                                    context, data, _chosenValue))
                           ],
                         );
                       });
@@ -57,12 +58,13 @@ class _SearchFeedState extends State<SearchFeed> {
     );
   }
 
-  Widget _buildListLayout(BuildContext context, data) {
+  Widget _buildListLayout(BuildContext context, data, String valueType) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Detail(data: data)),
+          MaterialPageRoute(
+              builder: (context) => Detail(data: data, valueType: valueType)),
         );
       },
       child: Container(

@@ -4,7 +4,9 @@ import 'package:search_test/dataModel.dart';
 
 class Detail extends StatelessWidget {
   final DataModel data;
-  Detail({Key key, @required this.data}) : super(key: key);
+  final String valueType;
+  Detail({Key key, @required this.data, @required this.valueType})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class Detail extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "SHOES",
+                  valueType,
                   style: TextStyle(fontWeight: FontWeight.w100, fontSize: 14),
                 ),
                 Text(
