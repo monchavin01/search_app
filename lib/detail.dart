@@ -13,23 +13,7 @@ class Detail extends StatelessWidget {
         child: Column(
           children: [
             appBar(context),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Container(
-                alignment: Alignment.center,
-                height: Get.height * 0.5,
-                width: Get.width * 0.9,
-                child: data.image != ""
-                    ? Image.network(
-                        data.image,
-                        fit: BoxFit.fill,
-                      )
-                    : Text(
-                        'No Image',
-                        style: TextStyle(fontSize: 32),
-                      ),
-              ),
-            ),
+            _buildLayoutImage(),
             data.description != ""
                 ? _buildLayoutDescription(data.description)
                 : _buildLayoutDescription('ไม่มีคำอธิบาย')
@@ -82,6 +66,26 @@ class Detail extends StatelessWidget {
         style: TextStyle(height: 1.5, color: Color(0xFF6F8398), fontSize: 16),
       ),
       padding: EdgeInsets.all(16),
+    );
+  }
+
+  Widget _buildLayoutImage() {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Container(
+        alignment: Alignment.center,
+        height: Get.height * 0.5,
+        width: Get.width * 0.9,
+        child: data.image != ""
+            ? Image.network(
+                data.image,
+                fit: BoxFit.fill,
+              )
+            : Text(
+                'No Image',
+                style: TextStyle(fontSize: 32),
+              ),
+      ),
     );
   }
 }

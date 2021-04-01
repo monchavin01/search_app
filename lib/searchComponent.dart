@@ -35,41 +35,8 @@ class _SearchFeedState extends State<SearchFeed> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Detail(data: data)),
-                              );
-                            },
-                            child: Container(
-                              width: Get.width,
-                              height: Get.height * 0.05,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 4,
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text('${data?.name ?? ''}'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
+                            padding: const EdgeInsets.all(8.0),
+                            child: _buildListLayout(context, data))
                       ],
                     );
                   });
@@ -78,6 +45,41 @@ class _SearchFeedState extends State<SearchFeed> {
               child: CircularProgressIndicator(),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildListLayout(BuildContext context, data) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Detail(data: data)),
+        );
+      },
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.05,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${data?.name ?? ''}'),
+            ),
+          ],
         ),
       ),
     );
