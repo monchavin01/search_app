@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:search_test/addDataInDB.dart';
+import 'package:search_test/screens/about.dart';
+import 'package:search_test/screens/domain.dart';
+import 'package:search_test/screens/model.dart';
 import 'package:search_test/searchComponent.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -17,7 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          width: Get.width,
           child: GestureDetector(
             onDoubleTap: () {
               Navigator.push(
@@ -45,18 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text('Shoe Knowledge'),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
-              onTap: () {},
+              title: Text('About'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AboutScreen()));
+              },
             ),
             ListTile(
-              title: Text('Item 2'),
-              onTap: () {},
+              title: Text('Model'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ModelScreen()));
+              },
+            ),
+            ListTile(
+              title: Text('Domain'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DomainScreen()));
+              },
             ),
           ],
         ),
