@@ -17,7 +17,7 @@ class _SearchFeedState extends State<SearchFeed> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 0),
+          padding: const EdgeInsets.only(top: 56),
           child: Container(
             child: FirestoreSearchScaffold(
               scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
@@ -97,7 +97,7 @@ class _SearchFeedState extends State<SearchFeed> {
   Widget _buildDropDown() {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 133.0,
+        top: 8,
         left: 10,
         right: 10,
       ),
