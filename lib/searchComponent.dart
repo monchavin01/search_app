@@ -17,7 +17,7 @@ class _SearchFeedState extends State<SearchFeed> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 128),
+          padding: const EdgeInsets.only(top: 0),
           child: Container(
             child: FirestoreSearchScaffold(
               scaffoldBackgroundColor: Colors.black.withOpacity(0.3),

@@ -15,11 +15,62 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          width: Get.width,
+          child: GestureDetector(
+            onDoubleTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddDataInDB()),
+              );
+            },
+            child: Text(
+              'SHOES',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w200),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
       body: Stack(children: [
         _buildScaffoldBody(),
-        appBar(context),
         Container(child: SearchFeed()),
       ]),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -31,29 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
         "assets/background.jpeg",
         fit: BoxFit.fitHeight,
       ),
-    );
-  }
-
-  Widget appBar(BuildContext context) {
-    return Positioned(
-      child: Container(
-        width: Get.width,
-        child: GestureDetector(
-          onDoubleTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddDataInDB()),
-            );
-          },
-          child: Text(
-            'SHOES',
-            style: TextStyle(
-                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w200),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-      top: 64,
     );
   }
 }
