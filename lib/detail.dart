@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:search_test/dataModel.dart';
 
 class Detail extends StatelessWidget {
-  final DataModel data;
+  var data;
   final String valueType;
   Detail({Key key, @required this.data, @required this.valueType})
       : super(key: key);
@@ -16,8 +15,23 @@ class Detail extends StatelessWidget {
           children: [
             appBar(context),
             _buildLayoutImage(),
-            data.description != ""
-                ? _buildLayoutDescription(data.description)
+            // data['image'] != ""
+            //             ? ClipRRect(
+            //                 borderRadius: BorderRadius.circular(100),
+            //                 child: Image.network(
+            //                   data['image'],
+            //                   fit: BoxFit.cover,
+            //                 ),
+            //               )
+            //             : ClipRRect(
+            //                 borderRadius: BorderRadius.circular(100),
+            //                 child: Image.network(
+            //                   'http://teamtech24.com/foodhati/foodhatiAdmin/assets/img/foodimg/default-food-image.jpg',
+            //                   fit: BoxFit.cover,
+            //                 ),
+            //               ),
+            data['description'] != ""
+                ? _buildLayoutDescription(data['description'])
                 : _buildLayoutDescription('ไม่มีคำอธิบาย')
           ],
         ),
@@ -40,11 +54,11 @@ class Detail extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  valueType,
+                  valueType ?? "onGrass",
                   style: TextStyle(fontWeight: FontWeight.w100, fontSize: 14),
                 ),
                 Text(
-                  data.name,
+                  data['name'],
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -60,7 +74,7 @@ class Detail extends StatelessWidget {
   }
 
   Widget _buildLayoutDescription(String value) {
-    value = data.description;
+    value = data['description'];
     return Container(
       child: Text(
         value,
@@ -75,17 +89,21 @@ class Detail extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Container(
+        color: data['image'] != "" ? null : Colors.black,
         alignment: Alignment.center,
         height: Get.height * 0.5,
         width: Get.width * 0.9,
-        child: data.image != ""
-            ? Image.network(
-                data.image,
-                fit: BoxFit.fill,
+        child: data['image'] != ""
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.network(
+                  data['image'],
+                  fit: BoxFit.cover,
+                ),
               )
             : Text(
                 'No Image',
-                style: TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: 32, color: Colors.white),
               ),
       ),
     );

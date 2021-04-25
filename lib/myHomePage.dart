@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:search_test/addDataInDB.dart';
+import 'package:search_test/detail.dart';
 import 'package:search_test/screens/about.dart';
 import 'package:search_test/screens/domain.dart';
 import 'package:search_test/screens/model.dart';
@@ -21,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String resultSearch = "";
   bool showCancelIcon = false;
   TextEditingController _controller = TextEditingController();
+  var _chosenValue;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: Get.height * 0.1,
               ),
               appBar(context),
-              _buildSearchLayout(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildDropDown(),
+                  _buildSearchLayout(),
+                ],
+              ),
               _buildResultSearch(),
               // SizedBox(
               //   height: 16,
@@ -93,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: Get.width * 0.6,
+        width: Get.width * 0.5,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(32),
@@ -127,32 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildTab(String text, builderRoute) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => builderRoute));
-          },
-        ),
-      ),
-    );
-  }
-
   Widget _buildResultSearch() {
     return Container(
-      height: Get.height * 0.6,
-      width: Get.width * 0.6,
+      height: Get.height * 0.5,
+      width: Get.width * 0.85,
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("computer-repair")
+            .collection(_chosenValue ?? "onGrass")
             .where("searchKey", arrayContains: resultSearch)
             .snapshots(),
         builder: (context, snapshot) {
@@ -174,11 +163,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             Detail(data: data.data())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Detail(
+                                        data: data.data(),
+                                        valueType: _chosenValue,
+                                      )));
                         },
                       ),
                     );
@@ -214,6 +205,65 @@ class _MyHomePageState extends State<MyHomePage> {
       text,
       style: GoogleFonts.rubik().copyWith(
           fontSize: 64, color: textColor, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _buildDropDown() {
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: Container(
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.grey),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+          boxShadow: [
+            BoxShadow(
+              // color: Colors.grey.withOpacity(0.5),
+
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 0.001,
+              // blurRadius: 00,
+              offset: Offset(0, 1), // changes position of shadow
+            ),
+          ],
+        ),
+        width: Get.width * 0.35,
+        // height: Get.height * 0.06,
+        child: Center(
+          child: DropdownButton<String>(
+            focusColor: Colors.white,
+            value: _chosenValue,
+            //elevation: 5,
+            style: TextStyle(color: Colors.white),
+            iconEnabledColor: Colors.black,
+            items: <String>[
+              'onGrass',
+              'running',
+              'court',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(color: Colors.black),
+                ),
+              );
+            }).toList(),
+            hint: Text(
+              "selected",
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
+            onChanged: (String value) {
+              setState(() {
+                _chosenValue = value;
+              });
+            },
+          ),
+        ),
+      ),
     );
   }
 }

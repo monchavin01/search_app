@@ -13,6 +13,7 @@ class _AddDataInDBState extends State<AddDataInDB> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController imageURLController = TextEditingController();
+  List<String> resultFormatKey;
 
   var _chosenValue;
 
@@ -108,9 +109,26 @@ class _AddDataInDBState extends State<AddDataInDB> {
     return null;
   }
 
+  test() {
+    String number = keyController.text;
+    List<String> listnumber = number.split("");
+    List<String> output = [];
+    for (int i = 0; i < listnumber.length; i++) {
+      if (i != listnumber.length - 1) {
+        output.add(listnumber[i].toString());
+      }
+      List<String> temp = [listnumber[i]];
+      for (int j = i + 1; j < listnumber.length; j++) {
+        temp.add(listnumber[j]);
+        output.add(temp.join().toString());
+      }
+    }
+    return resultFormatKey = output;
+  }
+
   void _onPressed(BuildContext context) {
     firestoreInstance.collection(_chosenValue).add({
-      "searchKey": keyController.text,
+      "searchKey": resultFormatKey,
       "name": nameController.text,
       "description": descriptionController.text,
       "image": imageURLController.text,
