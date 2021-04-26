@@ -59,15 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     MaterialPageRoute(builder: (context) => DomainScreen()));
               },
             ),
-            ListTile(
-              title: Text('Search for content'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SearchContentScreen()));
-              },
-            ),
           ],
         ),
       ),
@@ -136,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildResultSearch() {
+    print(_chosenValue);
     return Container(
       height: Get.height * 0.5,
       width: Get.width * 0.85,
@@ -155,11 +147,51 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.white,
                       child: GestureDetector(
                         child: ListTile(
-                          title: Text(
-                            data.data()['name'],
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                data.data()['image'],
+                                width: Get.width * 0.15,
+                                height: Get.width * 0.15,
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: Get.width * 0.58,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data.data()['name'],
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        data
+                                                    .data()['description']
+                                                    .toString()
+                                                    .length >
+                                                60
+                                            ? data
+                                                    .data()['description']
+                                                    .toString()
+                                                    .substring(0, 60) +
+                                                "..."
+                                            : data.data()['description'],
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         onTap: () {
@@ -267,3 +299,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+enum ListDropdown { onGrass, running, court }

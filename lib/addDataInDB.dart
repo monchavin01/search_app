@@ -13,6 +13,7 @@ class _AddDataInDBState extends State<AddDataInDB> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController imageURLController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
   List<String> resultFormatKey;
 
   var _chosenValue;
@@ -23,80 +24,107 @@ class _AddDataInDBState extends State<AddDataInDB> {
       appBar: AppBar(
         title: Text('Add Data'),
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 64),
-        child: Column(
-          children: [
-            _buildDropDown(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: keyController,
-                decoration: InputDecoration(
-                  labelText: 'Key Search',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter Key Search',
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 64),
+          child: Column(
+            children: [
+              _buildDropDown(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: keyController,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    labelText: 'Key Search',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Key Search',
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: nameController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter Name',
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: nameController,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Name',
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter Description',
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: priceController,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    labelText: 'Price',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Price',
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                controller: imageURLController,
-                decoration: InputDecoration(
-                  labelText: 'Image URL',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter URL',
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: descriptionController,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Description',
+                  ),
                 ),
               ),
-            ),
-            RaisedButton(
-              onPressed: () => {
-                _onPressed(context),
-              },
-              child: Text('Add'),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  controller: imageURLController,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    labelText: 'Image URL',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter URL',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RaisedButton(
+                  onPressed: () => {
+                    _onPressed(context),
+                  },
+                  child: Text('Add'),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -127,9 +155,11 @@ class _AddDataInDBState extends State<AddDataInDB> {
   }
 
   void _onPressed(BuildContext context) {
+    test();
     firestoreInstance.collection(_chosenValue).add({
       "searchKey": resultFormatKey,
       "name": nameController.text,
+      "price": priceController.text,
       "description": descriptionController.text,
       "image": imageURLController.text,
     }).then((value) {

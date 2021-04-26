@@ -15,21 +15,28 @@ class Detail extends StatelessWidget {
           children: [
             appBar(context),
             _buildLayoutImage(),
-            // data['image'] != ""
-            //             ? ClipRRect(
-            //                 borderRadius: BorderRadius.circular(100),
-            //                 child: Image.network(
-            //                   data['image'],
-            //                   fit: BoxFit.cover,
-            //                 ),
-            //               )
-            //             : ClipRRect(
-            //                 borderRadius: BorderRadius.circular(100),
-            //                 child: Image.network(
-            //                   'http://teamtech24.com/foodhati/foodhatiAdmin/assets/img/foodimg/default-food-image.jpg',
-            //                   fit: BoxFit.cover,
-            //                 ),
-            //               ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Text(
+                    'ราคา :',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  data['price'] != ""
+                      ? Text(
+                          data['price'],
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )
+                      : Text(
+                          ' -',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                ],
+              ),
+            ),
             data['description'] != ""
                 ? _buildLayoutDescription(data['description'])
                 : _buildLayoutDescription('ไม่มีคำอธิบาย')
@@ -51,6 +58,7 @@ class Detail extends StatelessWidget {
             child: Icon(Icons.arrow_back),
           ),
           Container(
+            width: Get.width * 0.7,
             child: Column(
               children: [
                 Text(
