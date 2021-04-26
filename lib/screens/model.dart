@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ModelScreen extends StatelessWidget {
   @override
@@ -7,8 +8,41 @@ class ModelScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Model'),
       ),
-      body: Container(
-        color: Colors.white,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            _buildBackGround('assets/background.jpeg'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: EdgeInsets.all(16),
+                width: Get.width * 0.99,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(spreadRadius: 0.01, blurRadius: 1),
+                  ],
+                ),
+                child: Image.asset(
+                  "assets/background.jpeg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBackGround(String url) {
+    return Container(
+      width: Get.width,
+      height: Get.height,
+      child: Image.asset(
+        url,
+        fit: BoxFit.cover,
       ),
     );
   }

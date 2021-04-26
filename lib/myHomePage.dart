@@ -62,28 +62,44 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Column(children: [
-              SizedBox(
-                height: Get.height * 0.1,
-              ),
-              appBar(context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildDropDown(),
-                  _buildSearchLayout(),
-                ],
-              ),
-              _buildResultSearch(),
-              // SizedBox(
-              //   height: 16,
-              // )
-            ]),
-          ],
-        ),
+      body: Stack(
+        children: [
+          _buildBackGround('assets/background.jpeg'),
+          Container(
+            child: Column(
+              children: [
+                Column(children: [
+                  SizedBox(
+                    height: Get.height * 0.1,
+                  ),
+                  appBar(context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildDropDown(),
+                      _buildSearchLayout(),
+                    ],
+                  ),
+                  _buildResultSearch(),
+                  // SizedBox(
+                  //   height: 16,
+                  // )
+                ]),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBackGround(String url) {
+    return Container(
+      width: Get.width,
+      height: Get.height,
+      child: Image.asset(
+        url,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -225,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildTextLogo('Shoes', Colors.blue),
+            _buildTextLogo('Shoes', Colors.white),
           ],
         ),
       ),
