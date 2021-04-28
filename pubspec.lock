@@ -64,7 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-<<<<<<< HEAD
   crypto:
     dependency: transitive
     description:
@@ -72,8 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-=======
->>>>>>> 3137d77040b6bb85d81778c4631720fd07d299f2
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -88,7 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-<<<<<<< HEAD
   ffi:
     dependency: transitive
     description:
@@ -103,8 +99,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
-=======
->>>>>>> 3137d77040b6bb85d81778c4631720fd07d299f2
   firebase_core:
     dependency: "direct main"
     description:
@@ -218,7 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-<<<<<<< HEAD
   path_provider:
     dependency: transitive
     description:
@@ -268,8 +261,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-=======
->>>>>>> 3137d77040b6bb85d81778c4631720fd07d299f2
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -352,7 +343,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-<<<<<<< HEAD
   win32:
     dependency: transitive
     description:
@@ -370,8 +360,3 @@ packages:
 sdks:
   dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.20.0"
-=======
-sdks:
-  dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.17.0"
->>>>>>> 3137d77040b6bb85d81778c4631720fd07d299f2
